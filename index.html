@@ -408,7 +408,87 @@ graph LR
       </section>
 
       <!-- ============================================
-           スライド 4: セクション区切り ― 3つの設計思想
+           スライド 4: サービスの流れ（詳細プロセスフロー）
+           ============================================ -->
+      <section>
+        <h2>🔄 サービスの流れ</h2>
+
+        <!-- 縦フロー図（HTML/CSS） -->
+        <div style="display:flex; gap:28px; align-items:flex-start;">
+
+          <!-- 左カラム: フロー図 -->
+          <div style="flex:1; display:flex; flex-direction:column; align-items:center; gap:0;">
+
+            <!-- STEP 1: ヒアリングシート -->
+            <div style="background:#1565c0; border:2px solid #42a5f5; border-radius:10px; padding:12px 24px; text-align:center; width:80%;">
+              <div style="font-size:0.7em; font-weight:700; color:#e0e0e0;">📋 ヒアリングシート（Excel）</div>
+            </div>
+            <div style="color:var(--primary); font-size:0.9em; line-height:1.6;">▼ <span style="font-size:0.6em; color:var(--text-dim);">抽出・取込</span></div>
+
+            <!-- STEP 2: マスターデータ -->
+            <div style="background:#0d47a1; border:2px solid #4fc3f7; border-radius:10px; padding:12px 24px; text-align:center; width:80%;">
+              <div style="font-size:0.7em; font-weight:700; color:#e0e0e0;">🗄️ マスターデータ（Google スプレッドシート）</div>
+            </div>
+            <div style="color:var(--primary); font-size:0.9em; line-height:1.6;">▼ <span style="font-size:0.6em; color:var(--text-dim);">データ参照</span></div>
+
+            <!-- STEP 3: マッピングエンジン + API連携 -->
+            <div style="background:rgba(74,20,140,0.6); border:2px solid #b388ff; border-radius:12px; padding:14px 20px; text-align:center; width:90%; position:relative;">
+              <div style="font-size:0.78em; font-weight:700; color:#b388ff;">⚙️ マッピングエンジン</div>
+              <div style="display:flex; gap:8px; margin-top:8px; justify-content:center; flex-wrap:wrap;">
+                <span style="background:#6a1b9a; border:1px solid #e040fb; border-radius:6px; padding:4px 10px; font-size:0.55em; color:#e0e0e0;">🤖 Gemini API<br><span style="color:#ce93d8;">ジャンル自動判定</span></span>
+                <span style="background:#e65100; border:1px solid #ffa726; border-radius:6px; padding:4px 10px; font-size:0.55em; color:#e0e0e0;">🌐 楽天 API<br><span style="color:#ffcc80;">カテゴリ属性取得</span></span>
+                <span style="background:#1b5e20; border:1px solid #66bb6a; border-radius:6px; padding:4px 10px; font-size:0.55em; color:#e0e0e0;">✅ バリデーション<br><span style="color:#a5d6a7;">品質チェック</span></span>
+              </div>
+            </div>
+            <div style="color:var(--primary); font-size:0.9em; line-height:1.6;">▼ <span style="font-size:0.6em; color:var(--text-dim);">自動変換・出力</span></div>
+
+            <!-- STEP 4: 4サイト出力 -->
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr 1fr; gap:6px; width:100%;">
+              <div style="background:#2e7d32; border:1px solid #66bb6a; border-radius:8px; padding:8px; text-align:center;">
+                <div style="font-size:0.58em; font-weight:700; color:#e0e0e0;">🟢 チョイス</div>
+                <div style="font-size:0.48em; color:#a5d6a7;">TSV</div>
+              </div>
+              <div style="background:#1565c0; border:1px solid #42a5f5; border-radius:8px; padding:8px; text-align:center;">
+                <div style="font-size:0.58em; font-weight:700; color:#e0e0e0;">🔵 楽天</div>
+                <div style="font-size:0.48em; color:#90caf9;">CSV</div>
+              </div>
+              <div style="background:#e65100; border:1px solid #ffa726; border-radius:8px; padding:8px; text-align:center;">
+                <div style="font-size:0.58em; font-weight:700; color:#e0e0e0;">🟠 さとふる</div>
+                <div style="font-size:0.48em; color:#ffcc80;">CSV</div>
+              </div>
+              <div style="background:#f9a825; border:1px solid #fff176; border-radius:8px; padding:8px; text-align:center;">
+                <div style="font-size:0.58em; font-weight:700; color:#212121;">🟡 ふるなび</div>
+                <div style="font-size:0.48em; color:#424242;">CSV</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- 右カラム: ステップ解説 -->
+          <div style="flex:1;">
+            <div class="card primary" style="margin-bottom:12px;">
+              <h3>① 抽出・取込</h3>
+              <p>事業者から届く<strong>ヒアリングシート（Excel）</strong>を、ワンクリックでマスターデータに取り込みます。手動転記は不要です。</p>
+            </div>
+            <div class="card accent" style="margin-bottom:12px;">
+              <h3>② マッピング＆AI連携</h3>
+              <p>マスターデータを参照し、<strong>マッピングルール</strong>に従って各サイト向けに自動変換。この過程で：</p>
+              <ul>
+                <li><strong>Gemini API</strong> がジャンル・カテゴリを自動判定</li>
+                <li><strong>楽天 API</strong> がカテゴリ固有の属性情報を自動取得</li>
+              </ul>
+            </div>
+            <div class="card success" style="margin-bottom:0;">
+              <h3>③ 自動変換・出力</h3>
+              <p>バリデーション通過後、<strong>4サイト分のデータファイル</strong>（TSV / CSV）をGoogle Driveに自動出力。そのままアップロード可能な状態で完成します。</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- ============================================
+           スライド 5: セクション区切り ― 3つの設計思想
            ============================================ -->
       <section class="section-divider">
         <div class="section-num">01</div>
